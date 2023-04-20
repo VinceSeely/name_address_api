@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+    web:
+        build: .\NameANdAddressAPI
+        ports:
+            - "8000:80"
+        depends_on:
+            - db
+    db:
+        image: ravendb/ravendb
+        ports:
+            - "38888:38888"
+            - "8080:8080"
+        command: --init-file /data/application/init.sql
+        volumes:
+            - ./init.sql:/data/application/init.sql
+        cap_add:
+            - SYS_NICE  # CAP_SYS_NICE
+        environment:
+            - RAVEN_ARGS='--Setup.Mode=None'
+            - RAVEN_Security_UnsecuredAccessAllowed='PrivateNetwork'
