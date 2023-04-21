@@ -6,6 +6,8 @@ services:
             dockerfile: .\NameAndAddressAPI\Dockerfile
         ports:
             - "8000:80"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=development
         depends_on:
             - db
     db:

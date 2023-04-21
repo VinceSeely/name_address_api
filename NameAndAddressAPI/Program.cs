@@ -14,6 +14,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    Console.WriteLine("Swagger enabled: URL if running in docker localhost:8000/swagger/index.html");
 }
 
 app.UseHttpsRedirection();
