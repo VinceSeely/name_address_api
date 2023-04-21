@@ -10,12 +10,12 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("docker"))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
     Console.WriteLine("Swagger enabled: URL if running in docker localhost:8000/swagger/index.html");
-}
+} 
 
 app.UseHttpsRedirection();
 

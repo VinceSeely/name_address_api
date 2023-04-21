@@ -1,18 +1,24 @@
 using NUnit.Framework;
 
-namespace NameAndAddressAPITests
-{
-    public class Tests
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+namespace NameAndAddressAPITests;
 
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
+public abstract class BaseUnitTests
+{
+    [OneTimeSetUp]
+    public void OneTimeSetup()
+    {
+        Setup();
+        Mock();
+        Run();
     }
+
+    [OneTimeTearDownAttribute]
+    public void TearDown()
+    {
+
+    }
+
+    public abstract void Run();
+    public abstract void Mock();
+    public abstract void Setup();
 }

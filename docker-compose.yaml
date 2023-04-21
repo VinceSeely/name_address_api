@@ -7,7 +7,7 @@ services:
         ports:
             - "8000:80"
         environment:
-            - ASPNETCORE_ENVIRONMENT=development
+            - ASPNETCORE_ENVIRONMENT=docker
         depends_on:
             - db
     db:
