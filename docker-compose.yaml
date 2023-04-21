@@ -12,9 +12,14 @@ services:
             - db
     db:
         image: ravendb/ravendb
+        dns:
+            - 8.8.8.8
+            - 8.8.4.4
         ports:
             - "38888:38888"
             - "8080:8080"
+            - "443:443"
         environment:
             - RAVEN_ARGS='--Setup.Mode=None'
             - RAVEN_Security_UnsecuredAccessAllowed='PrivateNetwork'
+            - PUBLIC_SERVER_URL=http://localhost:8080
