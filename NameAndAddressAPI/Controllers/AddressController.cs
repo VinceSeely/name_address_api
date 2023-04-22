@@ -24,25 +24,27 @@ public class AddressController : ControllerBase
         return null;
     }
 
-    [HttpPut(Name = "AddAddress")]
-    public ActionResult<string> InsertAddress([FromQuery] string name, [FromBody] Address address)
+    [HttpPost(Name = "AddAddress")]
+    public ActionResult<string> InsertAddress([FromBody] Address address)
     {
-        if (_addressManager.AddressExists(name))
+        if (_addressManager.AddressExists(address.Name))
         {
-            _logger.LogInformation($"attempted to insert a duplicate entry for {name}");
-            return $"failed to insert there is already an entry for {name}";
+            _logger.LogInformation($"attempted to insert a duplicate entry for {address.Name}");
+            return $"failed to insert there is already an entry for {address.Name}";
         }
-        _addressManager.AddAddress(name, address);
+        _addressManager.AddAddress(address.Name, address);
         return "Successfully uploaded";
     }
 
-    public ActionResult<string> UpdateAddress(string name, Address address)
+
+    [HttpPut(Name = "UpdateAddress")]
+    public ActionResult<string> UpdateAddress([FromBody] Address address)
     {
-        if (!_addressManager.AddressExists(name))
+        if (!_addressManager.AddressExists(address.Name))
         {
-            return $"Failed to update {name}. No such address exists so it cannot be updated.";
+            return $"Failed to update {address.Name}. No such address exists so it cannot be updated.";
         }
-        _addressManager.UpdateAddress(name, address);
+        _addressManager.UpdateAddress(address.Name, address);
         return "Successfully updated";
     }
 }

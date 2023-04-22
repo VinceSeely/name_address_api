@@ -17,5 +17,5 @@ public class DocumentStoreHolder : IDocumentStoreHolder
         Store.Initialize();
     }
 
-    public DocumentStore Store { get; }
+    public IDocumentStore Store { get; }
 }

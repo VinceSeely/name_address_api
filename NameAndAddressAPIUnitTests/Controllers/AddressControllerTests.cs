@@ -34,7 +34,7 @@ public class when_adding_an_address_to_the_database : AddressControllerTests
 
     public override void Run()
     {
-        result = _sut.InsertAddress(name, address);
+        result = _sut.InsertAddress(address);
     }
 
     public override void Mock()
@@ -44,15 +44,16 @@ public class when_adding_an_address_to_the_database : AddressControllerTests
     }
     public override void Setup()
     {
+        name = "unique name 1";
         address = new()
         {
+            Name = name,
             Street = "",
             City = "",
             State = "",
             ZipCode = "",
             Country = "",
         };
-        name = "unique name 1";
         base.Setup();
     }
 
@@ -77,7 +78,7 @@ public class when_adding_an_address_to_the_database_and_the_name_already_exists 
 
     public override void Run()
     {
-        result = _sut.InsertAddress(name, address);
+        result = _sut.InsertAddress(address);
     }
 
     public override void Mock()
@@ -88,15 +89,16 @@ public class when_adding_an_address_to_the_database_and_the_name_already_exists 
 
     public override void Setup()
     {
+        name = "unique name 1";
         address = new()
         {
+            Name = name,
             Street = "",
             City = "",
             State = "",
             ZipCode = "",
             Country = "",
         };
-        name = "unique name 1";
         base.Setup();
     }
 
@@ -126,7 +128,7 @@ public class when_updating_an_address_in_the_database : AddressControllerTests
 
     public override void Run()
     {
-        result = _sut.UpdateAddress(name, address);
+        result = _sut.UpdateAddress(address);
     }
 
     public override void Mock()
@@ -136,15 +138,16 @@ public class when_updating_an_address_in_the_database : AddressControllerTests
     }
     public override void Setup()
     {
+        name = "unique name 1";
         address = new()
         {
+            Name = name,
             Street = "",
             City = "",
             State = "",
             ZipCode = "",
             Country = "",
         };
-        name = "unique name 1";
         base.Setup();
     }
 
@@ -169,7 +172,7 @@ public class when_updating_an_address_in_the_database_but_the_name_does_not_exsi
 
     public override void Run()
     {
-        result = _sut.UpdateAddress(name, address);
+        result = _sut.UpdateAddress(address);
     }
 
     public override void Mock()
@@ -179,15 +182,16 @@ public class when_updating_an_address_in_the_database_but_the_name_does_not_exsi
     }
     public override void Setup()
     {
+        name = "unique name 1";
         address = new()
         {
+            Name = name,
             Street = "",
             City = "",
             State = "",
             ZipCode = "",
             Country = "",
         };
-        name = "unique name 1";
         base.Setup();
     }
 

@@ -1,3 +1,6 @@
+using NameAndAddressAPI.Services;
+using NameAndAddressAPI.Services.DataManagment;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// Could replace with an IOC using the services directory
+builder.Services.AddSingleton<IAddressManager, AddressManager>();
+builder.Services.AddSingleton<IDocumentStoreHolder, DocumentStoreHolder>();
 
 var app = builder.Build();
 

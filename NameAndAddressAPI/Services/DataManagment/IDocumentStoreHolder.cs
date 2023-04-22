@@ -4,5 +4,5 @@ namespace NameAndAddressAPI.Services.DataManagment;
 
 public interface IDocumentStoreHolder
 {
-    public DocumentStore Store { get; }
+    public IDocumentStore Store { get; }
 }
