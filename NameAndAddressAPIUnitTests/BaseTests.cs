@@ -1,8 +1,8 @@
 using NUnit.Framework;
 
-namespace NameAndAddressAPITests;
+namespace NameAndAddressAPIUnitTests;
 
-public abstract class BaseUnitTests
+public abstract class BaseTests
 {
     [OneTimeSetUp]
     public void OneTimeSetup()
@@ -12,7 +12,7 @@ public abstract class BaseUnitTests
         Run();
     }
 
-    [OneTimeTearDownAttribute]
+    [OneTimeTearDown]
     public void TearDown()
     {
 

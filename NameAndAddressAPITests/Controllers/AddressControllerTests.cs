@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace NameAndAddressAPITests.Controllers;
 
-public abstract class AddressControllerTests : BaseUnitTests
+public abstract class AddressControllerTests : BaseTests
 {
 }
