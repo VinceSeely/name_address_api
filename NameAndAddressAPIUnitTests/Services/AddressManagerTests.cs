@@ -125,7 +125,7 @@ public class when_inserting_an_address_into_the_document_store : AddressManagerT
     [Test]
     public void then_the_address_should_be_passed_to_the_document_store()
     {
-        documentSessionMock.Verify(x => x.Store(_address, _address.Name));
+        documentSessionMock.Verify(x => x.Store(_address, $"{config.DatabaseName}/{_address.Name}"));
     }
 
 
@@ -250,5 +250,27 @@ public class when_deleteing_an_address : AddressManagerTests
     public void then_the_changes_should_be_saved()
     {
         documentSessionMock.Verify(x => x.SaveChanges());
+    }
+}
+
+public class when_getting_all_addresses : AddressManagerTests
+{
+    private IEnumerable<Address> results;
+
+    public override void Run()
+    {
+        results = _sut.GetCachedAddresses();
+    }
+
+    [Test]
+    public void then_the_results_should_be_returned()
+    {
+        Assert.AreEqual(results, queryableAddresses);
+    }
+
+    [Test]
+    public void then_query_has_been_called()
+    {
+        documentSessionMock.Verify(x => x.Query<Address>(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()), Times.Once());
     }
 }

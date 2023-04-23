@@ -20,7 +20,7 @@ public class AddressManager : IAddressManager
     {
         using (var session = _documentStoreHolder.Store.OpenSession())
         {
-            session.Store(address, address.Name);
+            session.Store(address, $"{_config.DatabaseName}/{address.Name}");
             session.SaveChanges();
         }
     }
@@ -54,6 +54,15 @@ public class AddressManager : IAddressManager
         {
             session.Delete($"{_config.DatabaseName}/{name}");
             session.SaveChanges(); 
+        }
+    }
+
+    public IEnumerable<Address> GetCachedAddresses()
+    {
+        using (var session = _documentStoreHolder.Store.OpenSession())
+        {
+            var addresses = session.Query<Address>().ToList();
+            return addresses;
         }
     }
 }

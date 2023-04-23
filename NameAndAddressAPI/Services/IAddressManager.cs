@@ -8,4 +8,5 @@ public interface IAddressManager
     void AddAddress(Address address);
     void UpdateAddress(Address address);
     void DeleteAddress(string name);
+    IEnumerable<Address> GetCachedAddresses();
 }

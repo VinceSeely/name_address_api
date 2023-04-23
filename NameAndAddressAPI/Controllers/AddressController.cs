@@ -18,12 +18,6 @@ public class AddressController : ControllerBase
         _addressManager = addressManager;
     }
 
-    [HttpGet(Name = "GetAddresses")]
-    public IEnumerable<String> Get()
-    {
-        return null;
-    }
-
     [HttpPost(Name = "AddAddress")]
     public ActionResult<string> InsertAddress([FromBody] Address address)
     {
@@ -58,5 +52,15 @@ public class AddressController : ControllerBase
         _addressManager.DeleteAddress(name);
         return $"Successfully deleted {name}";
 
+    }
+
+
+
+    [HttpGet(Name = "GetAddresses")]
+    public ActionResult<IEnumerable<Address>> GetAllAddresses()
+    {
+        var addresses = _addressManager.GetCachedAddresses();
+        ActionResult<IEnumerable<Address>> results = new(addresses);
+        return results;
     }
 }
