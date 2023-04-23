@@ -32,7 +32,7 @@ public class AddressController : ControllerBase
             _logger.LogInformation($"attempted to insert a duplicate entry for {address.Name}");
             return $"failed to insert there is already an entry for {address.Name}";
         }
-        _addressManager.AddAddress(address.Name, address);
+        _addressManager.AddAddress(address);
         return "Successfully uploaded";
     }
 
@@ -44,7 +44,7 @@ public class AddressController : ControllerBase
         {
             return $"Failed to update {address.Name}. No such address exists so it cannot be updated.";
         }
-        _addressManager.UpdateAddress(address.Name, address);
+        _addressManager.UpdateAddress(address);
         return "Successfully updated";
     }
 }

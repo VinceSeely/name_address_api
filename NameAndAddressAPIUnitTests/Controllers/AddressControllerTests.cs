@@ -66,7 +66,7 @@ public class when_adding_an_address_to_the_database : AddressControllerTests
     [Test]
     public void then_the_address_manager_is_called_to_add_the_address_and_name_to_the_database()
     {
-        AddressManagerMock.Verify(x => x.AddAddress(name, address));
+        AddressManagerMock.Verify(x => x.AddAddress(address));
     }
 }
 
@@ -158,9 +158,9 @@ public class when_updating_an_address_in_the_database : AddressControllerTests
     }
 
     [Test]
-    public void then_the_address_manager_is_called_to_add_the_address_and_name_to_the_database()
+    public void then_the_address_manager_is_called_to_update_the_address_and_name_to_the_database()
     {
-        AddressManagerMock.Verify(x => x.UpdateAddress(name, address));
+        AddressManagerMock.Verify(x => x.UpdateAddress(address));
     }
 }
 
@@ -196,7 +196,7 @@ public class when_updating_an_address_in_the_database_but_the_name_does_not_exsi
     }
 
     [Test]
-    public void then_there_should_be_a_successfully_add_message()
+    public void then_there_should_be_a_successfully_update_message()
     {
         Assert.AreEqual(result.Value, $"Failed to update {name}. No such address exists so it cannot be updated.");
     }

@@ -1,3 +1,4 @@
+using NameAndAddressAPI.Models;
 using NameAndAddressAPI.Services;
 using NameAndAddressAPI.Services.DataManagment;
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // Could replace with an IOC using the services directory
+builder.Services.AddSingleton<RavenConfig>(builder.Configuration.GetSection("RavenDb").Get<RavenConfig>());
 builder.Services.AddSingleton<IAddressManager, AddressManager>();
 builder.Services.AddSingleton<IDocumentStoreHolder, DocumentStoreHolder>();
 
