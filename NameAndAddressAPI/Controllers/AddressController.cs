@@ -18,7 +18,7 @@ public class AddressController : ControllerBase
         _addressManager = addressManager;
     }
 
-    [HttpPost(Name = "AddAddress")]
+    [HttpPost("AddAddress")]
     public ActionResult<string> InsertAddress([FromBody] Address address)
     {
         if (_addressManager.AddressExists(address.Name))
@@ -31,7 +31,7 @@ public class AddressController : ControllerBase
     }
 
 
-    [HttpPut(Name = "UpdateAddress")]
+    [HttpPut("UpdateAddress")]
     public ActionResult<string> UpdateAddress([FromBody] Address address)
     {
         if (!_addressManager.AddressExists(address.Name))
@@ -42,8 +42,8 @@ public class AddressController : ControllerBase
         return "Successfully updated";
     }
 
-    [HttpDelete(Name = "DeleteAddress")]
-    public ActionResult<string> DeleteAddress(string name)
+    [HttpDelete("DeleteAddress/{name}")]
+    public ActionResult<string> DeleteAddress([FromRoute] string name)
     {
         if (!_addressManager.AddressExists(name))
         {
@@ -56,7 +56,8 @@ public class AddressController : ControllerBase
 
 
 
-    [HttpGet(Name = "GetAddresses")]
+    [HttpGet("GetAddresses")]
+    
     public ActionResult<IEnumerable<Address>> GetAllAddresses()
     {
         var addresses = _addressManager.GetCachedAddresses();

@@ -1,26 +1,28 @@
 using NUnit.Framework;
+using System;
+using System.Net.Http;
 
 namespace NameAndAddressAPITests;
 
 public abstract class BaseTests
 {
-    protected readonly string _baseUrl = "http://localhost:8000";
+    protected const string _baseUrl = "http://localhost:8000";
+    protected string _routeUrl = String.Empty;
+    protected HttpClient _httpclient;
 
     [OneTimeSetUp]
     public void OneTimeSetup()
     {
         Setup();
-        Mock();
         Run();
     }
 
-    [OneTimeTearDownAttribute]
-    public void TearDown()
-    {
-
-    }
-
+    [OneTimeTearDown]
+    public abstract void TearDown();
     public abstract void Run();
-    public abstract void Mock();
-    public abstract void Setup();
+    public virtual void Setup()
+    {
+        _httpclient = new HttpClient();
+        _httpclient.BaseAddress = new Uri(_baseUrl);
+    }
 }
