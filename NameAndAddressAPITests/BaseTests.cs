@@ -4,6 +4,8 @@ namespace NameAndAddressAPITests;
 
 public abstract class BaseTests
 {
+    protected readonly string _baseUrl = "http://localhost:8000";
+
     [OneTimeSetUp]
     public void OneTimeSetup()
     {
