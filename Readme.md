@@ -30,4 +30,8 @@ To run unit tests you can either run them in the Visual Studio test explorer or 
 
 ### Running Integration Tests
 
-To run the integration tests you need to make sure that the application is running somewhere. After the application is running you should be able to execute the tests. Assuming you are running the application in docker you chan just execute `dotnet test .\NameAndAddressAPITests\` to run the integration tests. If you are not running in docker locally you will need to change the value of the constant `_baseUrl` in the file `NameAndAddressAPITests\BaseTests.cs` to be the correct url and or port to be able to run these tests.
+To run the integration tests you need to make sure that the application is running somewhere. After the application is running you should be able to execute the tests. Assuming you are running the application in docker you chan just execute `dotnet test .\NameAndAddressAPITests\` to run the integration tests. If you are not running in docker locally you will need to change the value of the constant `_baseUrl` in the file `NameAndAddressAPITests\BaseTests.cs` to be the correct url and or port to be able to run these tests. 
+
+### If Running Integration and Unit tests
+
+Make sure you have updated all the correct values and that the application is running where the integration tests are expecting it to be run. Then you should be able to run the command `dotnet test` and all the tests will be run.
