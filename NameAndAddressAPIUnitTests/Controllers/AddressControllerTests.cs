@@ -202,3 +202,60 @@ public class when_updating_an_address_in_the_database_but_the_name_does_not_exsi
     }
 }
 
+
+public class when_deleteing_a_address_from_the_table_and_it_does_exist : AddressControllerTests
+{
+    private string name;
+    private ActionResult<string> result;
+
+    public override void Run()
+    {
+        result = _sut.DeleteAddress(name);
+    }
+    public override void Mock()
+    {
+        base.Mock();
+        AddressManagerMock.Setup(x => x.AddressExists(name)).Returns(true);
+    }
+
+    [Test]
+    public void then_the_method_to_delete_should_be_called()
+    {
+        AddressManagerMock.Verify(x => x.DeleteAddress(name));
+    }
+
+    [Test]
+    public void then_there_should_be_a_successfully_deleted_message()
+    {
+        Assert.AreEqual(result.Value, $"Successfully deleted {name}");
+    }
+}
+public class when_deleteing_a_address_from_the_table_and_it_does_not_exist : AddressControllerTests
+{
+    private string name;
+    private ActionResult<string> result;
+
+    public override void Run()
+    {
+        result = _sut.DeleteAddress(name);
+    }
+    public override void Mock()
+    {
+        base.Mock();
+        AddressManagerMock.Setup(x => x.AddressExists(name)).Returns(false);
+    }
+
+    [Test]
+    public void then_the_method_to_delete_should_not_be_called()
+    {
+        AddressManagerMock.Verify(x => x.DeleteAddress(name), Times.Never());
+    }
+
+
+    [Test]
+    public void then_there_should_be_a_failed_to_delete_message()
+    {
+        Assert.AreEqual(result.Value, $"Failed to delete {name}. No such address exists so it cannot be deleted.");
+    }
+
+}

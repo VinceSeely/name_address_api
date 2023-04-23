@@ -47,4 +47,16 @@ public class AddressController : ControllerBase
         _addressManager.UpdateAddress(address);
         return "Successfully updated";
     }
+
+    [HttpDelete(Name = "DeleteAddress")]
+    public ActionResult<string> DeleteAddress(string name)
+    {
+        if (!_addressManager.AddressExists(name))
+        {
+            return $"Failed to delete {name}. No such address exists so it cannot be deleted.";
+        }
+        _addressManager.DeleteAddress(name);
+        return $"Successfully deleted {name}";
+
+    }
 }
