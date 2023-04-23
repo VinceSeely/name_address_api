@@ -16,12 +16,18 @@ If you are running the RavenDB locally you can either use the docker container t
 
 ## Cached Data
 
-We are using the built in caching in RavenDB.Client package to do all of the data caching for this program. 
+We are using the built in caching in RavenDB.Client package to do all of the data caching for this program.
 
 ### Things I Noticed
 
-While testing this I noticed that the caching is used for insert and update to quickly access the documents. If a query is being executed like for get all Addresses the data is cached by the query tags not necessarily by what has been added or not added. so the first time executing the get all endpoint the response time is slower than the second time you execute it. This is due to how RavenDB has configured everything to work when querying for data and interacting with the cache and then saving things to the database backend. 
+While testing this I noticed that the caching is used for insert and update to quickly access the documents. If a query is being executed like for get all Addresses the data is cached by the query tags not necessarily by what has been added or not added. so the first time executing the get all endpoint the response time is slower than the second time you execute it. This is due to how RavenDB has configured everything to work when querying for data and interacting with the cache and then saving things to the database backend.
 
-## Running Unit Tests
+## Runnign Tests
 
-To run unit tests you can either run them in the Visual Studio test explorer or on the command line via the command `dotnet test` these test are setup to run and test all buisness logic that was needed to make sure everything was properly called and that the information that was expected was called.
+### Running Unit Tests
+
+To run unit tests you can either run them in the Visual Studio test explorer or on the command line via the command `dotnet test .\NameAndAddressAPIUnitTests\` these test are setup to run and test all buisness logic that was needed to make sure everything was properly called and that the information that was expected was called.
+
+### Running Integration Tests
+
+To run the integration tests you need to make sure that the application is running somewhere. After the application is running you should be able to execute the tests. Assuming you are running the application in docker you chan just execute `dotnet test .\NameAndAddressAPITests\` to run the integration tests. If you are not running in docker locally you will need to change the value of the constant `_baseUrl` in the file `NameAndAddressAPITests\BaseTests.cs` to be the correct url and or port to be able to run these tests.
